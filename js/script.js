@@ -13,7 +13,7 @@ const toggleNav = () => {
     document.body.classList.toggle('lock-screen')
 
     if (nav.classList.contains('hidden')) {
-        btnToggleNav.textContent = 'menu'
+        btnToggleNav.textContent = 'menú'
     } else {
         // Cuando se abre el menú después de la transición, cambie el texto respectivamente
         setTimeout(() => {
