@@ -93,3 +93,28 @@ document.body.addEventListener('keydown', e => {
         btnToggleNav.focus()
     }
 })
+
+// Enviar datos del formulario
+
+const frmEmail = document.getElementById('frm-email')
+frmEmail.addEventListener('submit', sendEmail)
+
+const serviceId = 'service_zq0wa9i'
+const templateId = 'template_1dvwjvu'
+const apiKey = 'j6-tlfwfNJosQcweP'
+
+function sendEmail(event) {
+    event.preventDefault()
+    emailjs.init(serviceId)
+
+    emailjs
+        .sendForm(serviceId, templateId, frmEmail, apiKey)
+        .then(result => Swal.fire('Su mensaje se ha enviado correctamente'))
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No ha sido posible enviar el mensaje!',
+            })
+        })
+}
