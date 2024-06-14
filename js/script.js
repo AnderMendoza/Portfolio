@@ -132,19 +132,3 @@ function sendEmail(event) {
             })
     }
 }
-
-// validar captcha
-
-document.getElementById('frm-email').addEventListener('submit', function (event) {
-    event.preventDefault() // Evitar envío por defecto
-
-    var recaptchaResponse = grecaptcha.getResponse()
-    var recaptchaError = document.getElementById('recaptcha-error')
-
-    if (recaptchaResponse.length == 0) {
-        recaptchaError.style.display = 'block'
-    } else {
-        recaptchaError.style.display = 'none'
-        this.submit()
-    }
-})
