@@ -118,3 +118,16 @@ function sendEmail(event) {
             })
         })
 }
+
+// validar captcha
+
+document.getElementById('frm-email').addEventListener('submit', function (event) {
+    event.preventDefault() // Evitar envío por defecto
+
+    var recaptchaResponse = grecaptcha.getResponse()
+    if (recaptchaResponse.length == 0) {
+        alert('Por favor, completa el CAPTCHA.')
+    } else {
+        this.submit()
+    }
+})
