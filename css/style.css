@@ -915,6 +915,10 @@ body.light .signatures {
     margin-inline-start: var(--gutter-nano);
 }
 
+.contact-form .g-recaptcha {
+    margin-bottom: 25px;
+}
+
 .contact-form .error-message {
     color: red;
     margin-top: 10px;
