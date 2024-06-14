@@ -105,18 +105,32 @@ const apiKey = 'j6-tlfwfNJosQcweP'
 
 function sendEmail(event) {
     event.preventDefault()
-    emailjs.init(serviceId)
 
-    emailjs
-        .sendForm(serviceId, templateId, frmEmail, apiKey)
-        .then(result => Swal.fire('Su mensaje se ha enviado correctamente'))
-        .catch(error => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'No ha sido posible enviar el mensaje!',
+    var recaptchaResponse = grecaptcha.getResponse()
+    var recaptchaError = document.getElementById('recaptcha-error')
+
+    if (recaptchaResponse.length == 0) {
+        recaptchaError.style.display = 'block'
+    } else {
+        recaptchaError.style.display = 'none'
+
+        emailjs.init(apiKey)
+
+        emailjs
+            .sendForm(serviceId, templateId, frmEmail)
+            .then(result => {
+                Swal.fire('Su mensaje se ha enviado correctamente')
+                frmEmail.reset() // Resetear el formulario
+                grecaptcha.reset() // Resetear el reCAPTCHA
             })
-        })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No ha sido posible enviar el mensaje!',
+                })
+            })
+    }
 }
 
 // validar captcha
